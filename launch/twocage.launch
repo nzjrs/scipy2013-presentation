@@ -1,0 +1,15 @@
+<launch>
+
+  <node name="cage1" pkg="scipy" type="assay.py">
+    <param name="device" type="int" value="0" />
+  </node>
+  <node name="cage2" pkg="scipy" type="assay.py">
+    <param name="device" type="int" value="-1" />
+  </node>
+  <node name="cage3" pkg="scipy" type="assay.py">
+    <param name="device" type="int" value="-1" />
+  </node>
+
+  <node name="recorder" pkg="rosbag" type="rosbag" args="record -a -o $(find scipy)/" />
+
+</launch>

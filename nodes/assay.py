@@ -8,7 +8,7 @@ import scipy.msg
 
 class Assay:
     def __init__(self, device, cage):
-        self.dev = VideoSource(device) if device is not None else FakeSource()
+        self.dev = VideoSource(device) if device != -1 else FakeSource()
         self.cage = MouseCage(cage)
         self.img = rospy.Publisher("~image", sensor_msgs.msg.Image)
         self.temp = rospy.Publisher("~temp", std_msgs.msg.Float32)
@@ -31,6 +31,6 @@ class Assay:
 
 if __name__ == "__main__":
     rospy.init_node("assay")
-    Assay(rospy.get_param('~device', None),
+    Assay(rospy.get_param('~device', -1),
           rospy.get_param('~cage', 0)).spin()
 
